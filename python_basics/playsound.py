@@ -2,7 +2,7 @@
 ## Friso's Sample Player ##
 ###########################
 
-# Importing simpleaudio ibrary
+# Importing simpleaudio library
 
 import simpleaudio as sa
 
