@@ -1,8 +1,8 @@
-##########################
-## Friso's Sample Player##
-##########################
+###########################
+## Friso's Sample Player ##
+###########################
 
-# Importing Simpleaudio Library
+# Importing simpleaudio ibrary
 
 import simpleaudio as sa
 
@@ -10,7 +10,7 @@ import simpleaudio as sa
 
 wave_obj = sa.WaveObject.from_wave_file("/home/fr1so/Documents/CSD2/music-and-technology-year-2-new/python_basics/kick.wav")
 
-# Define Sample playing function
+# Define sample playing function
 
 def playSample(amount):
     for x in range(amount):
