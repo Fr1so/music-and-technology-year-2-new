@@ -8,7 +8,7 @@ import simpleaudio as sa
 
 # Sample location
 
-wave_obj = sa.WaveObject.from_wave_file("admin:///media/sf_VirtualBox_Shared_Files/kick.wav")
+wave_obj = sa.WaveObject.from_wave_file("...admin:///media/sf_VirtualBox_Shared_Files/kick.wav")
 
 # Define sample playing function
 
