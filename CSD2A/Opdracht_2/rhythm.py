@@ -9,7 +9,7 @@ import time
 
 # Sample location
 
-wave_obj = sa.WaveObject.from_wave_file("../../assets/kick.wav")
+wave_obj = sa.WaveObject.from_wave_file("../assets/kick.wav")
 
 # Define sample playing function
 
@@ -20,9 +20,17 @@ def playSample(amount):
 
 # User interaction
 
-amountOfTimes = int(input("Please enter the amount of times you would like for the sample to be played: "))
-print(amountOfTimes, "times.")
+numPlaybackTimes = int(input("Please enter the amount of times you would like for the sample to be played: "))
+
+print(numPlaybackTimes, "times.")
+
+noteDurations = []
+
+for i in range(numPlaybackTimes):
+    noteDurations.append(float(input("Enter the duration of the notes: ")))
+
+print(noteDurations)
 
 # Run sample playing function
 
-playSample(amountOfTimes)
+playSample(numPlaybackTimes)
