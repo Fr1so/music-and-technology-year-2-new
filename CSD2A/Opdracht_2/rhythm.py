@@ -1,5 +1,7 @@
 ###############################
+##                           ##
 ## Friso's Rhythmic Playback ##
+##                           ##
 ###############################
 
 #######################
@@ -8,21 +10,6 @@
 
 import simpleaudio as sa
 import time
-
-###################
-# Sample location #
-###################
-
-wave_obj = sa.WaveObject.from_wave_file("../assets/kick.wav")
-
-##################################
-# Define sample playing function #
-##################################
-
-def playSample(amount):
-    for x in range(amount):
-        play_obj = wave_obj.play()
-        play_obj.wait_done()
 
 ####################
 # User interaction #
@@ -51,15 +38,25 @@ print("Bpm: ", bpm, "Quarternote duration: ", quarterNote, "sec")
 # Note time duration calculation #
 ##################################
 
+# Enumerates through note length list of user and transforms to length appropriate to bpm of user #
+
 timeDurations = []
 
-for amount in range(len(noteDurationsList)):
-    timeDurations.append((60.0 / bpm) * noteDurationsList[amount])
+for i in range(len(noteDurationsList)):
+    timeDurations.append(quarterNote * noteDurationsList[i])
 
 print(timeDurations) 
 
-################################
-# Run rhythmic playback engine #
-################################
+###################
+# Sample location #
+###################
 
-playSample(numPlaybackTimes)
+wave_obj = sa.WaveObject.from_wave_file("../assets/kick.wav")
+
+####################################
+# Play amount of samples in rhythm #
+####################################
+
+for i in timeDurations:
+    wave_obj.play()
+    time.sleep(i)
