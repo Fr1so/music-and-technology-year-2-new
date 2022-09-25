@@ -36,18 +36,27 @@ print(numPlaybackTimes, "times.")
 
 noteDurationsList = []
 
-for i in range(numPlaybackTimes):
+for amount in range(numPlaybackTimes):
     noteDuration = (float(input("Please enter the duration of the notes as a float: ")))   
     noteDurationsList.append(noteDuration)
         
 print(noteDurationsList)
 
-bpm = float(input("Please enter the bpm: "))
-quarterNote = 60.0 / bpm
+bpm = float(input("Please enter the bpm as a float: "))
+quarterNote = (60.0 / bpm)
 
 print("Bpm: ", bpm, "Quarternote duration: ", quarterNote, "sec")
 
+##################################
+# Note time duration calculation #
+##################################
 
+timeDurations = []
+
+for amount in range(len(noteDurationsList)):
+    timeDurations.append((60.0 / bpm) * noteDurationsList[amount])
+
+print(timeDurations) 
 
 ################################
 # Run rhythmic playback engine #
