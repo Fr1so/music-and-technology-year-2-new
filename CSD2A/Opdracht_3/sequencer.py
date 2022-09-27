@@ -21,7 +21,7 @@ numPlaybackTimes = int(input("Please enter the amount of times you would like fo
 
 print(numPlaybackTimes, "times.")
 
-noteDurationsList = [1.0, 0.2]
+noteDurationsList = []
 
 for amount in range(numPlaybackTimes):
     noteDuration = (float(input("Please enter the duration of the notes as a float: ")))   
