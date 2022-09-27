@@ -65,12 +65,12 @@ print(timeDurations)
 # Sample location #
 ###################
 
-wave_obj = sa.WaveObject.from_wave_file("../assets/kick.wav")
+waveObj = sa.WaveObject.from_wave_file("../assets/kick.wav")
 
 ####################################
 # Play amount of samples in rhythm #
 ####################################
 
 for i in timeDurations:
-    wave_obj.play()
+    waveObj.play()
     time.sleep(i)
