@@ -21,7 +21,8 @@ numPlaybackTimes = int(input("Please enter the amount of times you would like fo
 
 print(numPlaybackTimes, "times.")
 
-noteDurationsList = []
+noteDurationsList = [1.0, 0.2]
+
 
 for amount in range(numPlaybackTimes):
     noteDuration = (float(input("Please enter the duration of the notes as a float: ")))   
@@ -29,7 +30,16 @@ for amount in range(numPlaybackTimes):
         
 print(noteDurationsList)
 
-bpm = float(input("Please enter the bpm as a float: "))
+
+bpm = 120.0
+
+userBPM = (input("Default BPM is 120.0, please enter the bpm to change it or press enter to keep default BPM: "))
+
+if userBPM == '':
+    bpm = bpm
+else:
+    bpm = float(userBPM)
+
 quarterNote = (60.0 / bpm)
 
 print("Bpm: ", bpm, "Quarternote duration: ", quarterNote, "sec")
