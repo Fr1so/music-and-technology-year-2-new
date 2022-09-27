@@ -31,12 +31,18 @@ print(noteDurationsList)
 
 bpm = 120.0
 
-userBPM = (input("Default BPM is 120.0, please enter the bpm to change it or press enter to keep default BPM: "))
+correctInput = False
 
-if userBPM == '':
-    bpm = bpm
-else:
-    bpm = float(userBPM)
+while (not correctInput):
+    userBPM = (input("Default BPM is 120.0, please enter the bpm to change it or press enter to keep default BPM: "))
+    if not userBPM:
+        correctInput = True
+    else:
+        try:
+            bpm = float(userBPM)
+            correctInput = True
+        except:
+            print("Incorrect input, please enter a bpm.")
 
 quarterNote = (60.0 / bpm)
 
