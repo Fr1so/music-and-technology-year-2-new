@@ -23,13 +23,11 @@ print(numPlaybackTimes, "times.")
 
 noteDurationsList = [1.0, 0.2]
 
-
 for amount in range(numPlaybackTimes):
     noteDuration = (float(input("Please enter the duration of the notes as a float: ")))   
     noteDurationsList.append(noteDuration)
         
 print(noteDurationsList)
-
 
 bpm = 120.0
 
