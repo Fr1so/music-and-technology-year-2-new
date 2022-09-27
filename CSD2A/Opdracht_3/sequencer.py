@@ -31,6 +31,9 @@ print(noteDurationsList)
 
 bpm = 120.0
 
+# Based on lesson material
+# Asks for bpm input, if none use default bpm, if float/int escape while loop, if incorrect keep looping
+
 correctInput = False
 
 while (not correctInput):
