@@ -20,22 +20,12 @@ import random
 
 print('Welcome to the Sample Sequencer!')
 
-numPlaybackTimes = int(input("Please enter the amount of times you would like for the sample to be played: "))
 
-print(numPlaybackTimes, "times.")
 
-noteDurationsList = []
-
-for amount in range(numPlaybackTimes):
-    noteDuration = (float(input("Please enter the duration of the notes as a float: ")))   
-    noteDurationsList.append(noteDuration)
-        
-print(noteDurationsList)
+# Asks for bpm input, if none use default bpm, if float/int escape while loop, if incorrect keep looping 
+# (Based on lesson material)
 
 bpm = 120.0
-
-# Based on lesson material
-# Asks for bpm input, if none use default bpm, if float/int escape while loop, if incorrect keep looping
 
 correctInput = False
 
@@ -53,6 +43,32 @@ while (not correctInput):
 quarterNote = (60.0 / bpm)
 
 print("Bpm: ", bpm, "Quarternote duration: ", quarterNote, "sec")
+
+# Catches ValueError's of inputs #
+
+while True:
+    try:
+        numPlaybackTimes = int(input("Please enter the amount of times you would like for the sample to be played: "))
+    except ValueError:
+        print("Please enter a number.")
+    else:
+        break
+
+print(numPlaybackTimes, "times.")
+
+noteDurationsList = []
+
+for amount in range(numPlaybackTimes):
+    while True:
+        try:
+            noteDuration = (float(input("Please enter the duration of the notes as a float: ")))   
+            noteDurationsList.append(noteDuration)
+        except ValueError:
+            print("Please enter a float (a whole number will be transformed to a float (1 -> 1.0).")
+        else:
+            break
+        
+print(noteDurationsList)
 
 ##################################
 # Note time duration calculation #
