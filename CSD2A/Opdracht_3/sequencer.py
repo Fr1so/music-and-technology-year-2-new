@@ -18,6 +18,8 @@ import random
 
 # Ask user for amount of times, length (with 1 being quarter note) and bpm # (default bpm is 120)
 
+print('Welcome to the Sample Sequencer!')
+
 numPlaybackTimes = int(input("Please enter the amount of times you would like for the sample to be played: "))
 
 print(numPlaybackTimes, "times.")
@@ -63,13 +65,13 @@ timeDurations = []
 for i in range(len(noteDurationsList)):
     timeDurations.append(quarterNote * noteDurationsList[i])
 
-print('timedurations: ', timeDurations) 
+print('timeDurations: ', timeDurations) 
 
 ###################################################
 # Converting list of time durations to timestamps #
 ###################################################
 
-# timeDurations where 1.0 is a quarter note will be transformed to timeStamp16thList where 1 will be a sixteenth note #
+# timeDurations where 1 is a quarter note will be transformed to timeStamp16thList where 1 will be a sixteenth note #
 
 ts16thList = []
 
@@ -86,16 +88,16 @@ print('ts16list: ', ts16thList)
 
 # timeStamp16thList will be transformed to timestamps in unix time #
 
-unixTs = []
+unixTS = []
 
 def ts16thListToUnix(bpm, ts16thList):
     value16th = 15 / bpm
     for timestamp in ts16thList:
-        unixTs.append(value16th * timestamp)
+        unixTS.append(value16th * timestamp)
 
 ts16thListToUnix(bpm, ts16thList)
 
-print('unixts: ', unixTs)
+print('unixTS: ', unixTS)
 
 ####################
 # Sample locations #
@@ -115,21 +117,45 @@ startTime = time.time()
 
 # Changing variable for each next timestamp in rhythm #
 
-currentTS = unixTs.pop(0)
+currentTS = unixTS.pop(0)
 
-# Sequence playing while loop #
+TSCounter = 0
+
+# Sequence playing while loop from lesson #
 
 while True:
+
+  #var for storing the current time
+
+  currentTime = time.time()
+
+  #check if the current time - the start time is bigger or even with the current time stamp from the timeStampsTime list. if so, play the sample
+
+  if(currentTime - startTime >= currentTS):
+
+    samples[0].play()
+
+    # if there are timestamps left in the timestamps list
+
+    if unixTS:
+
+      #if the list timeStampsTime still isn't empty, fill the timestamp var with the first float from the list
+
+      currentTS = unixTS.pop(0)
+
+    else:
+
+      #if the list is empty break the loops
+       
+      break
     
-    currentTime = time.time()
+  else:
 
-    # Play sample if unix time is later than or same as the user inputted timestamp(s) #
+    # short wait to prevent we'll keep the processor busy when there's nothing to do
 
-    if ((currentTime - startTime) >= currentTS):
-        samples[0].play()
-        currentTS = unixTs.pop(0)
-    else: 
-        break
+    time.sleep(0.001)
 
+# let the last 'note' ring out
 
 time.sleep(1)
+    
