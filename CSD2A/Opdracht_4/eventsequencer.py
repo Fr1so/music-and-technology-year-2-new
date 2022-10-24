@@ -81,7 +81,7 @@ timeDurations = []
 for i in range(len(noteDurationsList)):
     timeDurations.append(quarterNote * noteDurationsList[i])
 
-print('timeDurations: ', timeDurations) 
+print('timeDurations with', bpm, 'bpm: ', timeDurations) 
 
 ###################################################
 # Converting list of time durations to timestamps #
