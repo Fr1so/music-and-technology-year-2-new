@@ -10,12 +10,13 @@
 
 import simpleaudio as sa
 import time
+import random
 
 ####################
 # User interaction #
 ####################
 
-# Ask user for amount of times, length (with 1 being quarter note) and bpm #
+# Ask user for amount of times, length (with 1 being quarter note) and bpm # (default bpm is 120)
 
 numPlaybackTimes = int(input("Please enter the amount of times you would like for the sample to be played: "))
 
@@ -63,6 +64,26 @@ for i in range(len(noteDurationsList)):
     timeDurations.append(quarterNote * noteDurationsList[i])
 
 print(timeDurations) 
+
+###################################################
+# Converting list of time durations to timestamps #
+###################################################
+
+# timeDurations where 1.0 is a quarter note will be transformed to timeStamp16thList where 1 will be a sixteenth note #
+
+ts16thList = []
+
+def timeDurationsToTS16th(timeDurationList):
+    amount = 0
+    timeStamp16thList.append(amount)
+    for i in range(len(timeDurationList)-1):
+        amount = int(amount) + int(timeDurationList[i] * 4)
+        ts16thList.append(amount)
+
+timeDurationsToTS16th(timeDurations)
+
+print(ts16thList)
+
 
 ###################
 # Sample location #
