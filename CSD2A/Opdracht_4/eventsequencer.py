@@ -13,14 +13,27 @@ import time
 import random
 
 ####################
+# Sample locations #
+####################
+
+samples = [sa.WaveObject.from_wave_file("../assets/kick.wav"),
+            sa.WaveObject.from_wave_file("../assets/snare.wav"),
+            sa.WaveObject.from_wave_file("../assets/hihat.wav")]
+
+amountOfSamples = len(samples)
+
+drumSamples = []
+
+for i in range(amountOfSamples):
+    drumSamples.append(samples[i])
+
+####################
 # User interaction #
 ####################
 
 # Ask user for amount of times, length (with 1 being quarter note) and bpm # (default bpm is 120)
 
-print('Welcome to the Sample Sequencer!')
-
-
+print("Welcome to the Sample Sequencer!")
 
 # Asks for bpm input, if none use default bpm, if float/int escape while loop, if incorrect keep looping 
 # (Based on lesson material)
@@ -81,7 +94,7 @@ timeDurations = []
 for i in range(len(noteDurationsList)):
     timeDurations.append(quarterNote * noteDurationsList[i])
 
-print('timeDurations with', bpm, 'bpm: ', timeDurations) 
+print("timeDurations with", bpm, "bpm: ", timeDurations) 
 
 ###################################################
 # Converting list of time durations to timestamps #
@@ -100,7 +113,7 @@ def timeDurationsToTS16th(timeDurationList):
 
 timeDurationsToTS16th(timeDurations)
 
-print('ts16list: ', ts16thList)
+print("ts16list: ", ts16thList)
 
 # timeStamp16thList will be transformed to timestamps in unix time #
 
@@ -113,15 +126,22 @@ def ts16thListToUnix(bpm, ts16thList):
 
 ts16thListToUnix(bpm, ts16thList)
 
-print('unixTS: ', unixTS)
+print("unixTS: ", unixTS)
 
-####################
-# Sample locations #
-####################
+##########################
+# Event Handler Creation #
+##########################
 
-samples = [sa.WaveObject.from_wave_file("../assets/kick.wav"),
-            sa.WaveObject.from_wave_file("../assets/snare.wav"),
-            sa.WaveObject.from_wave_file("../assets/hihat.wav")]
+eventList = []
+
+def eventHandler(unixTS, drumSamples):
+    for i in range(len(unixTS)):
+        eventList.append(
+            {"unixTS: ", unixTS[i],
+            "drumSamples: ", drumSamples[random.randint(0, (amountOfSamples -1))]}
+        )
+
+eventHandler(unixTS, drumSamples)
 
 ####################################
 # Play amount of samples in rhythm #
