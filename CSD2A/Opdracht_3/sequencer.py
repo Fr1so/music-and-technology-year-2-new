@@ -97,16 +97,39 @@ ts16thListToUnix(bpm, ts16thList)
 
 print('unixts: ', unixTs)
 
-###################
-# Sample location #
-###################
+####################
+# Sample locations #
+####################
 
-waveObj = sa.WaveObject.from_wave_file("../assets/kick.wav")
+samples = [sa.WaveObject.from_wave_file("../assets/kick.wav"),
+            sa.WaveObject.from_wave_file("../assets/snare.wav"),
+            sa.WaveObject.from_wave_file("../assets/hihat.wav")]
 
 ####################################
 # Play amount of samples in rhythm #
 ####################################
 
-for i in timeDurations:
-    waveObj.play()
-    time.sleep(i)
+# Give a start unix time #
+
+startTime = time.time()
+
+# Changing variable for each next timestamp in rhythm #
+
+currentTS = unixTs.pop(0)
+
+# Sequence playing while loop #
+
+while True:
+    
+    currentTime = time.time()
+
+    # Play sample if unix time is later than or same as the user inputted timestamp(s) #
+
+    if ((currentTime - startTime) >= currentTS):
+        samples[0].play()
+        currentTS = unixTs.pop(0)
+    else: 
+        break
+
+
+time.sleep(1)
