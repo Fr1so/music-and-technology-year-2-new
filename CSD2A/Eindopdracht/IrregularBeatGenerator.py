@@ -8,7 +8,6 @@
 # Importing libraries #
 #######################
 
-from os import times
 import simpleaudio as sa
 import time
 import random
@@ -63,40 +62,24 @@ print("Bpm: ", bpm, "Quarternote duration: ", quarterNote, "sec")
 
 # Catches ValueError's of inputs #
 
-# Time signatures; 1 = 5/4, 2 = 7/8
-# Default bars amount is 4
+# Time signatures input; 1 = 5/4, 2 = 7/8
 
-barsAmount = 4
-
-while True:
-    try:
-        barsAmount = int(input("Please enter the amount of bars you would like to generate (standard is 4): "))
-        if(barsAmount > 0):
-            print("Amount of bars:", barsAmount)
-            break
-    except ValueError:
-        print("Please enter a number.")
-    else:
-        print("Please enter a positive number.")
-
-# Time signature input
-
-eightNote = 0
+musicalMeasure = []
 
 def timeSignatureCheck(timeSignature):
     if(timeSignature == 1):
-        eightNote = 10 
-        return eightNote
+        musicalMeasure = [5, 4] 
+        return musicalMeasure
     elif(timeSignature == 2):
-        eightNote = 7
-        return eightNote
+        musicalMeasure = [7, 8]
+        return musicalMeasure
 
 while True:
     try:
         timeSignature = int(input("Please enter either 1 (5/4) or 2 (7/8) for the time signature: "))
         if(timeSignature == 1 or timeSignature == 2):
-            eightNote = timeSignatureCheck(timeSignature)
-            print("Eight note: ", eightNote)
+            musicalMeasure = timeSignatureCheck(timeSignature)
+            print("musicalMeasure: ", musicalMeasure)
             break
     except ValueError:
         print("Please enter either 1 or 2.")
