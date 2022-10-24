@@ -94,10 +94,8 @@ def ts16thListToUnix(bpm, ts16thList):
         unixTs.append(value16th * timestamp)
 
 ts16thListToUnix(bpm, ts16thList)
-print('unixts: ', unixTs)
 
-time.sleep(10)
-    
+print('unixts: ', unixTs)
 
 ###################
 # Sample location #
