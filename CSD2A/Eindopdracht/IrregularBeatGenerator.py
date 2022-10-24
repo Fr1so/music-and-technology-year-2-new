@@ -1,13 +1,14 @@
-###############################
-##                           ##
-## Friso's Rhythmic Playback ##
-##                           ##
-###############################
+######################################
+##                                  ##
+## Friso's Irregular Beat Generator ##
+##                                  ##
+######################################
 
 #######################
 # Importing libraries #
 #######################
 
+from os import times
 import simpleaudio as sa
 import time
 import random
@@ -40,16 +41,19 @@ print("Welcome to the Sample Sequencer!")
 
 bpm = 120.0
 
-correctInput = False
+correctInputBPM = False
 
-while (not correctInput):
-    userBPM = (input("Default BPM is 120.0, please enter the bpm to change it or press enter to keep default BPM: "))
+while (not correctInputBPM):
+    userBPM = input("Default BPM is 120.0, please enter the bpm to change it or press enter to keep default BPM: ")
     if not userBPM:
-        correctInput = True
+        correctInputBPM = True
     else:
         try:
             bpm = float(userBPM)
-            correctInput = True
+            if(bpm > 0):
+                correctInputBPM = True
+            else:
+                print("Please enter a positive number.")
         except:
             print("Incorrect input, please enter a bpm.")
 
@@ -64,39 +68,69 @@ print("Bpm: ", bpm, "Quarternote duration: ", quarterNote, "sec")
 
 barsAmount = 4
 
-timeSignature = 0
-
 while True:
     try:
-        barsAmount = int(input("Please enter the amount of bars you would like to generate: "))
+        barsAmount = int(input("Please enter the amount of bars you would like to generate (standard is 4): "))
+        if(barsAmount > 0):
+            print("Amount of bars:", barsAmount)
+            break
     except ValueError:
         print("Please enter a number.")
     else:
-        break
+        print("Please enter a positive number.")
+
+# Time signature input
+
+eightNote = 0
+
+def timeSignatureCheck(timeSignature):
+    if(timeSignature == 1):
+        eightNote = 10 
+        return eightNote
+    elif(timeSignature == 2):
+        eightNote = 7
+        return eightNote
+
+while True:
+    try:
+        timeSignature = int(input("Please enter either 1 (5/4) or 2 (7/8) for the time signature: "))
+        if(timeSignature == 1 or timeSignature == 2):
+            eightNote = timeSignatureCheck(timeSignature)
+            print("Eight note: ", eightNote)
+            break
+    except ValueError:
+        print("Please enter either 1 or 2.")
+    else:
+        print("Please enter either 1 or 2.")
 
 # Amount of sample plays
 
 while True:
     try:
         numPlaybackTimes = int(input("Please enter the amount of times you would like for the sample to be played: "))
+        if(numPlaybackTimes > 0):
+            print(numPlaybackTimes, "times.")
+            break
     except ValueError:
         print("Please enter a number.")
     else:
-        break
+        print("Please enter a positive number.")
 
-print(numPlaybackTimes, "times.")
+# Note length input
 
 noteDurationsList = []
 
 for amount in range(numPlaybackTimes):
     while True:
         try:
-            noteDuration = (float(input("Please enter the duration of the notes as a float: ")))   
-            noteDurationsList.append(noteDuration)
+            noteDuration = (float(input("Please enter the duration of the notes as a float: ")))
+            if(noteDuration > 0):
+                noteDurationsList.append(noteDuration)
+                break
         except ValueError:
             print("Please enter a float (a whole number will be transformed to a float (1 -> 1.0).")
         else:
-            break
+            print("Please enter a number greater than 0.")
         
 print(noteDurationsList)
 
