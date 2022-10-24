@@ -22,10 +22,10 @@ samples = [sa.WaveObject.from_wave_file("../assets/kick.wav"),
 
 amountOfSamples = len(samples)
 
-drumSamples = []
+allSamples = []
 
 for i in range(amountOfSamples):
-    drumSamples.append(samples[i])
+    allSamples.append(samples[i])
 
 ####################
 # User interaction #
@@ -134,14 +134,14 @@ print("unixTS: ", unixTS)
 
 eventList = []
 
-def eventHandler(unixTS, drumSamples):
+def eventHandler(unixTS, allSamples):
     for i in range(len(unixTS)):
         eventList.append(
-            {"unixTS: ", unixTS[i],
-            "drumSamples: ", drumSamples[random.randint(0, (amountOfSamples -1))]}
+            {"unixTS": unixTS[i],
+            "allSamples": allSamples[random.randint(0, (amountOfSamples -1))]}
         )
 
-eventHandler(unixTS, drumSamples)
+eventHandler(unixTS, allSamples)
 
 ####################################
 # Play amount of samples in rhythm #
@@ -153,7 +153,7 @@ startTime = time.time()
 
 # Changing variable for each next timestamp in rhythm #
 
-currentTS = unixTS.pop(0)
+event = eventList.pop(0)
 
 TSCounter = 0
 
@@ -167,17 +167,17 @@ while True:
 
   #check if the current time - the start time is bigger or even with the current time stamp from the timeStampsTime list. if so, play the sample
 
-  if(currentTime - startTime >= currentTS):
+  if(currentTime - startTime >= event["unixTS"]):
 
-    samples[0].play()
+    event["allSamples"].play()
 
     # if there are timestamps left in the timestamps list
 
-    if unixTS:
+    if(eventList):
 
       #if the list timeStampsTime still isn't empty, fill the timestamp var with the first float from the list
 
-      currentTS = unixTS.pop(0)
+      event = eventList.pop(0)
 
     else:
 
