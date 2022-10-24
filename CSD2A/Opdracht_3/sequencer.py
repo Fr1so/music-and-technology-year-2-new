@@ -63,7 +63,7 @@ timeDurations = []
 for i in range(len(noteDurationsList)):
     timeDurations.append(quarterNote * noteDurationsList[i])
 
-print(timeDurations) 
+print('timedurations: ', timeDurations) 
 
 ###################################################
 # Converting list of time durations to timestamps #
@@ -75,15 +75,29 @@ ts16thList = []
 
 def timeDurationsToTS16th(timeDurationList):
     amount = 0
-    timeStamp16thList.append(amount)
+    ts16thList.append(amount)
     for i in range(len(timeDurationList)-1):
         amount = int(amount) + int(timeDurationList[i] * 4)
         ts16thList.append(amount)
 
 timeDurationsToTS16th(timeDurations)
 
-print(ts16thList)
+print('ts16list: ', ts16thList)
 
+# timeStamp16thList will be transformed to timestamps in unix time #
+
+unixTs = []
+
+def ts16thListToUnix(bpm, ts16thList):
+    value16th = 15 / bpm
+    for timestamp in ts16thList:
+        unixTs.append(value16th * timestamp)
+
+ts16thListToUnix(bpm, ts16thList)
+print('unixts: ', unixTs)
+
+time.sleep(10)
+    
 
 ###################
 # Sample location #
